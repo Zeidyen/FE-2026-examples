@@ -1,7 +1,7 @@
 ---
 title: "Coding Assignment Part 2"
-author: "Tobias Holden"
-date: '2023-04-29'
+author: "Abdulzeid Yen Anafo"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
