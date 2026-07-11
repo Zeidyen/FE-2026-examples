@@ -26,7 +26,7 @@ ep4_path="python_scripts"
 # This is where your simulations and outputs will be stored
 user = os.getlogin()
 user_dir= f'FE_{user}'
-job_directory = os.path.join('/projects/b1139', user_dir, 'FE-2023-examples/experiments')
+job_directory = os.path.join('/projects/b1139', user_dir, 'FE-2026-examples/experiments')
 os.makedirs(job_directory, exist_ok=True)
 
 # This is the path to the sisf image used to run EMOD

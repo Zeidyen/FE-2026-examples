@@ -1,5 +1,5 @@
-# FE-2023-examples
-Example scripts for 2023 faculty enrichment program in applied malaria modeling at Northwestern
+# FE-2026-examples
+Example scripts for 2026 faculty enrichment program in applied malaria modeling at Northwestern
 This is my work keep off!!!!!
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/numalariamodeling/FE-2023-examples/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-red.svg)](https://github.com/numalariamodeling/FE-2023-examples/blob/main/README.fr.md)
@@ -54,7 +54,7 @@ module load R/4.1.1
 </p>
 </details>
 
-Before running the weekly example scripts, please ensure that the emodpy virtual environment has been successfully loaded and that this [repository has been cloned](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to the project directory on QUEST, ideally as */projects/b1139/FE_<username>/FE-2023-examples*.
+Before running the weekly example scripts, please ensure that the emodpy virtual environment has been successfully loaded and that this [repository has been cloned](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to the project directory on QUEST, ideally as */projects/b1139/FE_<username>/FE-2026-examples*.
 - Navigate to the project: `cd /projects/b1139`
 - Make your personal directory for the program: `mkdir FE_<username>` then navigate into it using `cd FE_<username>`
 - Clone this repository with your ssh address for the repo. Click the green "code" button above and copy the ssh address then run the following on QUEST: `git clone <ssh address>`
@@ -118,9 +118,9 @@ Click the arrow to expand:
 <details><summary><span><em><h3>Running a simple EMOD simulation</h3></em></span></summary>
 <p>
 
-- Navigate to your local copy of this repository on QUEST: `cd /projects/b1139/FE_<username>/FE-2023-examples`  
-- Notice your job directory path in `manifest.py`: `/projects/b1139/FE_<username>/FE-2023-examples/experiments/`. This will help your track your simulations separately from other participants.
-    - *Note: any time you see items in between `< >`, they should be replaced ENTIRELY with whatever the item is labeled to be. For example, if your username was `abc123` then this job directory would be:* `/projects/b1139/FE_abc123/FE-2023-examples/experiments`
+- Navigate to your local copy of this repository on QUEST: `cd /projects/b1139/FE_<username>/FE-2026-examples`  
+- Notice your job directory path in `manifest.py`: `/projects/b1139/FE_<username>/FE-2026-examples/experiments/`. This will help your track your simulations separately from other participants.
+    - *Note: any time you see items in between `< >`, they should be replaced ENTIRELY with whatever the item is labeled to be. For example, if your username was `abc123` then this job directory would be:* `/projects/b1139/FE_abc123/FE-2026-examples/experiments`
 - Load your emodpy virtual environment (see prerequisites)  
 - Run simulation via `python3 run_example.py`
 - Wait for simulation to finish (~2 minutes)  
@@ -139,7 +139,7 @@ Click the arrow to expand:
 - Save and run the anlyzer using `python3 analyzer_W1.py` at the command line. We'll discuss in more depth next week how EMOD analyzers work and what you can do with them.
 - When the analyzer finishes running, navigate to the working directory where you saved your results (*Hint: check line 76 to start identifying where this might be*) and checkout the output of this analyzer - there should be a file called "All_Age_Inset_Chart.csv".
 - If the file was created succesfully, we can plot some basic data on the simulation. We'll use RStudio on the [QUEST Analytics Nodes](https://rstudio.questanalytics.northwestern.edu/) to run the plotter, but you can also choose to download your output file and run on RStudio locally. 
-    - Once logged into QUEST's RStudio you can navigate to this repository by clicking `Session` (in the toolbar) > `Set Working Directory` > `Choose Directory` > `...` > type  `/projects/b1139/FE_<username>/FE-2023-examples` > `Choose`
+    - Once logged into QUEST's RStudio you can navigate to this repository by clicking `Session` (in the toolbar) > `Set Working Directory` > `Choose Directory` > `...` > type  `/projects/b1139/FE_<username>/FE-2026-examples` > `Choose`
 - Open `plot_InsetChart.Rmd`, update the paths to match your output directory (`root`) and the experiment `subfolder` (should be the experiment name supplied to the analyzer) where the "All_Age_Inset_Chart.csv" is located.
 
 ```r

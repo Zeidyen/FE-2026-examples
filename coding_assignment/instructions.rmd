@@ -45,7 +45,7 @@ The first assignment asks you to demonstrate your ability to use the pre-requisi
 **Stuck?**
 
 -   Review the tutorials in the table above  
--   Post on the FE-2023 Slack Channel  
+-   Post on the FE-2026 Slack Channel  
 -   We will hold (virtual) Office Hours in Week 0 to answer questions and help out!  
 
 ### Instructions
@@ -124,7 +124,7 @@ Your directory structure should now be:
 
 #### Part 3. Submit to Slack
 
-Post your plot(s) to the FE-2023 slack channel for feedback.
+Post your plot(s) to the FE-2026 slack channel for feedback.
 
 -   How does it compare to others?  
 -   If something looks off, what do you think is causing it?  
