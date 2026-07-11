@@ -52,7 +52,7 @@ The first assignment asks you to demonstrate your ability to use the pre-requisi
 
 #### Part 0. Get a copy of the example data
 
-1.  Go to the [coding assignment repository](https://github.com/numalariamodeling/FE-2023-examples/tree/main/coding_assignment/example_data)
+1.  Go to the [coding assignment repository](https://github.com/Zeidyen/FE-2026-examples/tree/main/coding_assignment/project_dir/example_data)
 
 2.  Obtain a local copy of the `example_data/` folder
 
