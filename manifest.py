@@ -14,7 +14,6 @@ eradication_path=os.path.join(os.path.expanduser('~'),"download/Eradication")
 # Create 'Assets' directory or change to a path you prefer. idmtools will upload files found here.
 assets_input_dir="Assets"
 plugins_folder = "download/reporter_plugins"
-
 # This is where your inputs are located
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -45,8 +44,8 @@ SIF_PATH = os.path.join(ROOT_DIR, "containers/dtk_run_al2023.sif")
 partition = 'demo'
 
 # Environment module(s) that provide singularity/apptainer on this cluster.
-# On AWS this is a filesystem path to the modulefile; on Quest it was a name
-# like 'singularity/3.8.1'. idmtools passes these to `module load`.
+# On AWS this is a filesystem path to the modulefile; on other clusters it may
+# be a module name like 'singularity/3.8.1'. idmtools passes these to `module load`.
 singularity_module = '/shared/emod/shared_tools/modulefiles/singularity'
 
 # Wall-clock time limit requested per job (HH:MM:SS).

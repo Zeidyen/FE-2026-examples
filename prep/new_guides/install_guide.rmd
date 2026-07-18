@@ -50,7 +50,7 @@ version of emodpy/idmtools, follow **Option B**.
    there is nothing to download.
 
     - *NOTE: the older `dtk_run_rocky_py39.sif` (the image used on the previous
-      Quest cluster) is built on a Rocky base whose glibc is too old for the
+      cluster) is built on a Rocky base whose glibc is too old for the
       pip-installed Eradication binary, which targets Amazon Linux 2023. The
       custom `dtk_run_al2023.sif` image (built from `containers/dtk_run_al2023.def`)
       matches that base and is what you should use on AWS.*
