@@ -77,6 +77,9 @@ def set_param_fn(config):
     conf.add_species(config, manifest, ["gambiae"])
     # Climate
     climate_root = os.path.join('climate','FE_EXAMPLE', '2019001-2019365')
+    # Enable climate-by-data so the *_Filename params below are active (required by
+    # the installed emod-api, which errors if you set a param its climate mode ignores).
+    config.parameters.Climate_Model = "CLIMATE_BY_DATA"
     config.parameters.Air_Temperature_Filename = os.path.join(climate_root,'dtk_15arcmin_air_temperature_daily.bin')
     config.parameters.Land_Temperature_Filename = os.path.join(climate_root, 'dtk_15arcmin_air_temperature_daily.bin')
     config.parameters.Rainfall_Filename = os.path.join(climate_root, 'dtk_15arcmin_rainfall_daily.bin')

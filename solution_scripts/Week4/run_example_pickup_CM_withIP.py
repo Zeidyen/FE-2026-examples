@@ -47,6 +47,9 @@ def set_param_fn(config):
     
     
     #Add climate files
+    # Enable climate-by-data so the *_Filename params below are active (required by
+    # the installed emod-api, which errors if you set a param its climate mode ignores).
+    config.parameters.Climate_Model = "CLIMATE_BY_DATA"
     config.parameters.Air_Temperature_Filename = os.path.join('climate','example_air_temperature_daily.bin')
     config.parameters.Land_Temperature_Filename = os.path.join('climate','example_air_temperature_daily.bin')
     config.parameters.Rainfall_Filename = os.path.join('climate','example_rainfall_daily.bin')
