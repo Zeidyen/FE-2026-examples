@@ -62,7 +62,6 @@ Avant d'exécuter les scripts d'exemple hebdomadaires, veuillez vous assurer que
 	
 Avant de commencer un exercice, assurez-vous d'avoir récupéré les dernières modifications du répertoire (voir git-guides [git-pull](https://github.com/git-guides/git-pull)).
 	
-Pour plus d'aide sur l'utilisation de SLURM sur le cluster, consultez [ressources ](https://numalariamodeling.github.io/FE-2023-quarto-website/resources/coding_resources/quest_resources.html) sur le site web du programme.
 
 ## Semaine 1: Vue d'ensemble d'EMOD
 Cette semaine, nous discuterons de la structure générale et du contenu d'EMOD et nous nous assurerons que vous êtes prêts à exécuter le modèle sur notre cluster HPC linux (AWS). Vous allez mettre en place votre propre environnement virtuel pour exécuter EMOD via emodpy et idmtools et cloner ce répertoire github dans votre répertoire personnel sur le cluster. Veuillez vous familiariser avec le répertoire, le site web et la documentation EMOD avant d'exécuter l'exemple simple à la fin de cette semaine.
