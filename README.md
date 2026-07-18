@@ -136,14 +136,15 @@ Click the arrow to expand:
 ```
 - Save and run the anlyzer using `python3 analyzer_W1.py` at the command line. We'll discuss in more depth next week how EMOD analyzers work and what you can do with them.
 - When the analyzer finishes running, navigate to the working directory where you saved your results (*Hint: check line 76 to start identifying where this might be*) and checkout the output of this analyzer - there should be a file called "All_Age_Inset_Chart.csv".
-- If the file was created succesfully, we can plot some basic data on the simulation. Download your output file to your own computer and run the plotter in a local RStudio installation. 
-    - In your local RStudio, set the working directory to your downloaded copy of this repository by clicking `Session` (in the toolbar) > `Set Working Directory` > `Choose Directory` and selecting the folder.
-- Open `plot_InsetChart.Rmd`, update the paths to match your output directory (`root`) and the experiment `subfolder` (should be the experiment name supplied to the analyzer) where the "All_Age_Inset_Chart.csv" is located.
+- If the file was created succesfully, we can plot some basic data on the simulation. The plotter is a Python script, so you can run it directly on the cluster - no download or RStudio needed.
+- Open `plot_InsetChart.py` and update the paths near the top to match your output directory (`root`) and the experiment `subfolder` (the experiment name supplied to the analyzer) where the "All_Age_InsetChart.csv" is located:
 
-```r
-root <- "<output directory>"
-subfolder <- "<experiment name>"
+```python
+root = "<output directory>"
+subfolder = "<experiment name>"
 ```
+
+- Then run it with `python3 plot_InsetChart.py`. It saves the figures (PNG and PDF) next to your CSV.
 - At the top right of each code chunk there is a small green triangle - this will run the respective chunk when clicked. Run the first chunk to load libraries (lines 8-12). If you get an error that the libraries are missing, use `install.packages("<library name>")` to install them and then retry loading. Once they are loaded, run the plotter code chunk (lines 14-85). Check the saved plots in your output directory.
     - This plotter produces four groups of `InsetChart` channels generally relating to incidence, prevalence, climate/vectors, and the population/demogaphics. Explore each of the sets of plots and see what you can learn about this first simulation!
     - *Note: these plots can be helpful diagnostics to see how your simulation is performing, such as monitoring population levels; however, they should not be used to present results as they are just an example visualization not meant to address specific questions.*

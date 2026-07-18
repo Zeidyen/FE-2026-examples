@@ -138,14 +138,15 @@ Cliquez sur la flèche pour agrandir:
 ```
 - Sauvegardez et lancez l'analyzer en utilisant `python3 analyzer_W1.py` sur la ligne de commande. Nous verrons plus en détail la semaine prochaine comment fonctionnent les objets analyzers EMOD et ce que vous pouvez faire avec eux.
 - Lorsque l'analyzer a fini de fonctionner, naviguez jusqu'au répertoire de travail dans lequel vous avez sauvegardé vos résultats (*Ressort: vérifiez la ligne 76 pour commencer à identifier où cela pourrait être*) et vérifiez la sortie de cet analyzer - il devrait y avoir un fichier appelé "All_Age_Inset_Chart.csv".
-- Si le fichier a été créé avec succès, nous pouvons tracer quelques données de base sur la simulation. Téléchargez votre fichier de sortie sur votre ordinateur et exécutez le traceur dans une installation locale de RStudio. 
-    - Dans votre RStudio local, définissez le répertoire de travail sur votre copie téléchargée de ce dépôt en cliquant sur `Session` (dans la barre d'outils) > `Set Working Directory` > `Choose Directory` et en sélectionnant le dossier.
-- Ouvrez `plot_InsetChart.Rmd`, mettez à jour les chemins pour qu'ils correspondent à votre répertoire de sortie (`root`) et au `sous-dossier` de l'expérience (qui devrait être le nom de l'expérience fourni à l'analyzer) où se trouve le fichier "All_Age_Inset_Chart.csv".
+- Si le fichier a été créé avec succès, nous pouvons tracer quelques données de base sur la simulation. Le traceur est désormais un script Python, vous pouvez donc l'exécuter directement sur le cluster - sans téléchargement ni RStudio.
+- Ouvrez `plot_InsetChart.py` et mettez à jour les chemins en haut du fichier pour qu'ils correspondent à votre répertoire de sortie (`root`) et au `subfolder` de l'expérience (le nom de l'expérience fourni à l'analyzer) où se trouve le fichier "All_Age_InsetChart.csv" :
 
-```r
-root <- "<répertoire de sortie>"
-sous-dossier <- "<nom de l'expérience>"
+```python
+root = "<répertoire de sortie>"
+subfolder = "<nom de l'expérience>"
 ```
+
+- Ensuite, exécutez-le avec `python3 plot_InsetChart.py`. Il enregistre les figures (PNG et PDF) à côté de votre CSV.
 - En haut à droite de chaque bout de code, il y a un petit triangle vert - qui lancera le bout correspondant lorsqu'il sera cliqué. Exécutez le premier bout pour charger les bibliothèques (lignes 8-12). Si vous obtenez une erreur indiquant que les bibliothèques sont manquantes, utilisez `install.packages("<nom de la bibliothèque>")` pour les installer et réessayer de les charger. Une fois qu'elles sont chargées, exécutez le bout de code du traceur (lignes 14-85). Vérifiez les tracés sauvegardés dans votre répertoire output.
     - Ce traceur produit quatre groupes de canaux `InsetChart` se rapportant généralement à l'incidence, la prévalence, le climat/les vecteurs, et la population/la démogaphie. Explorez chacun des ensembles de graphiques et voyez ce que vous pouvez apprendre sur cette première simulation!
     - *Remarque: ces graphiques peuvent être utiles pour diagnostiquer les performances de votre simulation, par exemple pour surveiller les niveaux de population ; cependant, ils ne doivent pas être utilisés pour présenter des résultats, car il s'agit simplement d'un exemple de visualisation qui n'est pas destiné à répondre à des questions spécifiques.*
