@@ -67,8 +67,10 @@ if __name__ == "__main__":
     from idmtools.core.platform_factory import Platform
 
     
+    # Map an output subfolder name -> the experiment ID to analyze. Replace the ID
+    # with your own experiment's ID (printed when your run script finishes).
     expts = {
-        'example_basic' : 'd6992a9f-bc38-4162-9e27-177adfc906c5'
+        'example_basic' : '<your-experiment-id>'
     }
     
 
