@@ -47,9 +47,9 @@ EMOD configuration scripts contain five primary components:
           def general_sim(selected_platform):
               # Set platform and associated values, such as the maximum number of jobs to run at one time and other platform specifics
               platform = Platform(<platform>, job_directory=manifest.job_directory,
-                                  partition=<SLURM partition>, time=<'HH:MM:SS'>,
-                                  account=<SLURM account>, modules=['singularity'],
-                                  max_running_jobs=10)
+                                  partition=manifest.partition, time=manifest.sim_time,
+                                  modules=[manifest.singularity_module],
+                                  max_running_jobs=manifest.max_running_jobs)
               # create EMODTask using previously defined builders
               print("Creating EMODTask (from files)...")
               task = EMODTask.from_default2(

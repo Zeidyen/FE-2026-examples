@@ -19,8 +19,6 @@ from idmtools.entities.experiment import Experiment
 
 # from emodpy
 from emodpy.emod_task import EMODTask
-from emodpy.utils import EradicationBambooBuilds
-from emodpy.bamboo import get_model_files
 
 # from emod_api
 import emod_api.config.default_from_schema_no_validation as dfs
@@ -224,9 +222,9 @@ def general_sim(selected_platform):
     # Platform #
     ############
     # Set platform and associated values, such as the maximum number of jobs to run at one time
-    # Use b1139 for longer simulations (do not exveed 100 max_running_jobs)
-    platform = Platform(selected_platform, job_directory=manifest.job_directory, partition='b1139', time='6:00:00',
-                        account='b1139', modules=['singularity'], max_running_jobs=100)
+    # Longer walltime / higher job count for the multi-node spatial run (keep max_running_jobs <= 100)
+    platform = Platform(selected_platform, job_directory=manifest.job_directory, partition=manifest.partition, time='6:00:00',
+                        modules=[manifest.singularity_module], max_running_jobs=100)
     # Task #
     ########
     # create EMODTask #
@@ -308,6 +306,7 @@ if __name__ == "__main__":
     import pathlib
 
     dtk.setup(pathlib.Path(manifest.eradication_path).parent)
+    os.chmod(manifest.eradication_path, 0o755)
 
     selected_platform = "SLURM_LOCAL"
     general_sim(selected_platform)

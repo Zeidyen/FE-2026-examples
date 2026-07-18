@@ -12,8 +12,6 @@ from idmtools.entities.experiment import Experiment
 
 #emodpy
 from emodpy.emod_task import EMODTask
-from emodpy.utils import EradicationBambooBuilds
-from emodpy.bamboo import get_model_files
 import emod_api.config.default_from_schema_no_validation as dfs
 import emod_api.campaign as camp
 
@@ -116,8 +114,8 @@ def general_sim(selected_platform):
     """
 
     # Set platform and associated values, such as the maximum number of jobs to run at one time
-    platform = Platform(selected_platform, job_directory=manifest.job_directory, partition='b1139', time='2:00:00',
-                            account='b1139', modules=['singularity'], max_running_jobs=10)
+    platform = Platform(selected_platform, job_directory=manifest.job_directory, partition=manifest.partition, time='2:00:00',
+                            modules=[manifest.singularity_module], max_running_jobs=10)
 
     # create EMODTask 
     print("Creating EMODTask (from files)...")
@@ -177,5 +175,6 @@ if __name__ == "__main__":
     import pathlib
 
     dtk.setup(pathlib.Path(manifest.eradication_path).parent)
+    os.chmod(manifest.eradication_path, 0o755)
     selected_platform = "SLURM_LOCAL"
     general_sim(selected_platform)

@@ -1,0 +1,10 @@
+Bootstrap: docker
+From: amazonlinux:2023
+
+%post
+    dnf install -y python3.13-libs mpich
+    ln -sf /usr/lib64/mpich/lib/libmpi.so.12 /usr/lib64/mpich/lib/libmpich.so.12
+    dnf clean all
+
+%environment
+    export LD_LIBRARY_PATH=/usr/lib64/mpich/lib:$LD_LIBRARY_PATH

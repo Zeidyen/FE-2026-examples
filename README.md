@@ -1,7 +1,7 @@
 # FE-2026-examples
 Example scripts for 2026 faculty enrichment program in applied malaria modelling at the University of Health and Allied Sciences
-[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/numalariamodeling/FE-2023-examples/blob/main/README.md)
-[![fr](https://img.shields.io/badge/lang-fr-red.svg)](https://github.com/numalariamodeling/FE-2023-examples/blob/main/README.fr.md)
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Zeidyen/FE-2026-examples/blob/main/README.md)
+[![fr](https://img.shields.io/badge/lang-fr-red.svg)](https://github.com/Zeidyen/FE-2026-examples/blob/main/README.fr.md)
 
 ⚠️ - Tips
 
@@ -15,7 +15,7 @@ Example scripts for 2026 faculty enrichment program in applied malaria modelling
 Exercises usually consist of a simulation and an analyzer of simulation outputs. In some weeks, additional scripts exist to prepare simulation inputs or generate additional outputs and plots, or for model calibration as described in the instructions for the respective weeks.
 
 **Supplied scripts & checking results:**
-A few primary scripts are provided at the main level of this repository including running examples and analyzers. Most of the work for this course will be done by you building your own scripts based on the instructions with the help of these scripts. For each week, suggested simulation scripts for comparison or help during the exercise are provided in the respective week's [solution scripts](https://github.com/numalariamodeling/FE-2023-examples/tree/main/solution_scripts) folder. There is also an analyzer collection file in the solutions scripts that includes many commonly used analyzers that you may want to explore in more depth for your project. 
+A few primary scripts are provided at the main level of this repository including running examples and analyzers. Most of the work for this course will be done by you building your own scripts based on the instructions with the help of these scripts. For each week, suggested simulation scripts for comparison or help during the exercise are provided in the respective week's [solution scripts](https://github.com/Zeidyen/FE-2026-examples/tree/main/solution_scripts) folder. There is also an analyzer collection file in the solutions scripts that includes many commonly used analyzers that you may want to explore in more depth for your project. 
 
 *Note: if you use an analyzer from the collection, be sure to add the right reporters to create the necessary output files.*
 
@@ -28,7 +28,7 @@ Click the arrow to expand:
 <details><summary><span><em>Template `.bashrc` file</em></span></summary>
 <p>
 
-This template can be copied directly into your `.bashrc` file on QUEST: 
+This template can be copied directly into your `.bashrc` file on the cluster: 
 
 ```bash
 # .bashrc
@@ -53,17 +53,17 @@ module load R/4.1.1
 </p>
 </details>
 
-Before running the weekly example scripts, please ensure that the emodpy virtual environment has been successfully loaded and that this [repository has been cloned](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to the project directory on QUEST, ideally as */projects/b1139/FE_<username>/FE-2026-examples*.
-- Navigate to the project: `cd /projects/b1139`
+Before running the weekly example scripts, please ensure that the emodpy virtual environment has been successfully loaded and that this [repository has been cloned](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to your home directory on the cluster, i.e. *~/FE-2026-examples*.
+- Navigate to the project: `cd ~`
 - Make your personal directory for the program: `mkdir FE_<username>` then navigate into it using `cd FE_<username>`
-- Clone this repository with your ssh address for the repo. Click the green "code" button above and copy the ssh address then run the following on QUEST: `git clone <ssh address>`
+- Clone this repository with your ssh address for the repo. Click the green "code" button above and copy the ssh address then run the following on the cluster: `git clone <ssh address>`
 	
 Before you start on an exercise, make sure that you have pulled or fetched the latest changes from the repository (see git-guides [git-pull](https://github.com/git-guides/git-pull)).
 	
-For additional help on using SLURM on QUEST, checkout the [resources](https://numalariamodeling.github.io/FE-2023-quarto-website/resources/coding_resources/quest_resources.html) on the program website.
+For additional help on using SLURM on the cluster, checkout the [resources](https://numalariamodeling.github.io/FE-2023-quarto-website/resources/coding_resources/quest_resources.html) on the program website.
 
 ## Week 1: Overview of EMOD
-This week we will be discussing EMOD's general structure and content as well as making sure you are ready to run the model on our linux-based HPC, QUEST. You will set up your own virtual environment to run EMOD via emodpy and idmtools and clone this github repository to your FE directory on our QUEST project allocation, b1139. Please familiarize yourself with the repo, website, and EMOD documentation before running the simple example at the end of this week.
+This week we will be discussing EMOD's general structure and content as well as making sure you are ready to run the model on our linux-based HPC cluster (AWS). You will set up your own virtual environment to run EMOD via emodpy and idmtools and clone this github repository to your home directory on the cluster. Please familiarize yourself with the repo, website, and EMOD documentation before running the simple example at the end of this week.
 
 **What to Expect**
 
@@ -71,11 +71,11 @@ Click the arrow to expand:
 <details><summary><span><em><h3>Running EMOD from the terminal</h3></em></span></summary>
 <p>
 
-When you run an EMOD simulation script on QUEST, it will generate a set of initial messages. You will see a warning about no "idmtools.ini" - this is perfectly normal as we do not typically need the ini file to run with emodpy. Following this warning, you will see a segment that tells you some basic details about the idmtools platform you are using to run the script as well as the job directory, where all your simulation outputs will be stored.
+When you run an EMOD simulation script on the cluster, it will generate a set of initial messages. You will see a warning about no "idmtools.ini" - this is perfectly normal as we do not typically need the ini file to run with emodpy. Following this warning, you will see a segment that tells you some basic details about the idmtools platform you are using to run the script as well as the job directory, where all your simulation outputs will be stored.
 
 ![](static/example_run.png)
 
-After a short waiting period, you will also see additional lines providing information on the commissioning of your simulation(s). You can expect to see a line saying that the EMODTask is being created, a few warnings and notices about file creation, then the bars showing progress on asset discovery and simulation commissioning. Once fully commissioned, you will also see the QUEST job ID, job directory, suite ID, and experiment ID. A line in the [run_example.py](https://github.com/numalariamodeling/FE-2023-examples/blob/main/run_example.py) tells the terminal to wait until all of the simulations are finished running, so there is an additional progress bar and assertion that the experiment succeeded, or failed, (once complete) that may not be present in all runs if this line is excluded. Notice that we have commissioned and successfully run 1 simulation here (see 1/1 at end of progress bars).
+After a short waiting period, you will also see additional lines providing information on the commissioning of your simulation(s). You can expect to see a line saying that the EMODTask is being created, a few warnings and notices about file creation, then the bars showing progress on asset discovery and simulation commissioning. Once fully commissioned, you will also see the SLURM job ID, job directory, suite ID, and experiment ID. A line in the [run_example.py](https://github.com/Zeidyen/FE-2026-examples/blob/main/run_example.py) tells the terminal to wait until all of the simulations are finished running, so there is an additional progress bar and assertion that the experiment succeeded, or failed, (once complete) that may not be present in all runs if this line is excluded. Notice that we have commissioned and successfully run 1 simulation here (see 1/1 at end of progress bars).
 
 ![](static/example_commission.png)
 
@@ -117,18 +117,18 @@ Click the arrow to expand:
 <details><summary><span><em><h3>Running a simple EMOD simulation</h3></em></span></summary>
 <p>
 
-- Navigate to your local copy of this repository on QUEST: `cd /projects/b1139/FE_<username>/FE-2026-examples`  
-- Notice your job directory path in `manifest.py`: `/projects/b1139/FE_<username>/FE-2026-examples/experiments/`. This will help your track your simulations separately from other participants.
-    - *Note: any time you see items in between `< >`, they should be replaced ENTIRELY with whatever the item is labeled to be. For example, if your username was `abc123` then this job directory would be:* `/projects/b1139/FE_abc123/FE-2026-examples/experiments`
+- Navigate to your local copy of this repository on the cluster: `cd ~/FE-2026-examples`  
+- Notice your job directory path in `manifest.py`: `~/FE-2026-examples/experiments/`. This will help your track your simulations separately from other participants.
+    - *Note: any time you see items in between `< >`, they should be replaced ENTIRELY with whatever the item is labeled to be. For example, if your username was `abc123` then this job directory would be:* `~/FE-2026-examples/experiments`
 - Load your emodpy virtual environment (see prerequisites)  
 - Run simulation via `python3 run_example.py`
 - Wait for simulation to finish (~2 minutes)  
 - Go to the job directory (see `experiments` above) folder to find the generated experiment - it will be under a set of 16-digit alphanumeric strings. The structure of these strings is `Suite > Experiment > Simulations`. Due to current handling systems with SLURM you will not be able to see the experiment name given within the `run_example.py` script; however, this can be found in the experiment and simulation-level metadata.json files. You may also choose to sort your files based on time such that most recent experiments will appear first. 
 - Take a look through what was generated even in this simple run and get familiar with the file structure. You should always check your simulation-level outputs after running simulations to make sure they did what you expected. 
-    - *Note: be sure to go all the way into the folder structure to see your simulations & their outputs. For more information on what to expect, see [Week 1's "What to Expect"](https://github.com/numalariamodeling/FE-2023-examples#week-1-overview-of-emod)*
+    - *Note: be sure to go all the way into the folder structure to see your simulations & their outputs. For more information on what to expect, see [Week 1's "What to Expect"](https://github.com/Zeidyen/FE-2026-examples#week-1-overview-of-emod)*
     - You should see [`InsetChart.json`](https://emod.idmod.org/emodpy-malaria/emod/software-report-inset-chart/) in the simulation's output folder - this is EMOD's default report that will give you an idea of what's going on in your simulation. We'll do a basic, sample analysis of this data next.
 - Copy the experiment UID, located in the experiment-level `metadata.json`. Update the experiment name to match the one used above and paste the experiment UID in the "expts" dictionary (line 71) of `analyzer_W1.py` (located at the main level of the repository with the other provided scripts). It should look like the examples below and in the script. 
-    - ⚠️ *If you're not sure which is the experiment metadata, check the "item_type" and "name" in the file - do they say "experiment" and what you expect your experiment name to be, respectively? If yes, then you're in the right metadata file and can find the UID at the bottom. If you're still stuck, revist [Week 1's "What to Expect"](https://github.com/numalariamodeling/FE-2023-examples#week-1-overview-of-emod) on file structure.*
+    - ⚠️ *If you're not sure which is the experiment metadata, check the "item_type" and "name" in the file - do they say "experiment" and what you expect your experiment name to be, respectively? If yes, then you're in the right metadata file and can find the UID at the bottom. If you're still stuck, revist [Week 1's "What to Expect"](https://github.com/Zeidyen/FE-2026-examples#week-1-overview-of-emod) on file structure.*
 	
 ```python
     expts = {
@@ -137,8 +137,8 @@ Click the arrow to expand:
 ```
 - Save and run the anlyzer using `python3 analyzer_W1.py` at the command line. We'll discuss in more depth next week how EMOD analyzers work and what you can do with them.
 - When the analyzer finishes running, navigate to the working directory where you saved your results (*Hint: check line 76 to start identifying where this might be*) and checkout the output of this analyzer - there should be a file called "All_Age_Inset_Chart.csv".
-- If the file was created succesfully, we can plot some basic data on the simulation. We'll use RStudio on the [QUEST Analytics Nodes](https://rstudio.questanalytics.northwestern.edu/) to run the plotter, but you can also choose to download your output file and run on RStudio locally. 
-    - Once logged into QUEST's RStudio you can navigate to this repository by clicking `Session` (in the toolbar) > `Set Working Directory` > `Choose Directory` > `...` > type  `/projects/b1139/FE_<username>/FE-2026-examples` > `Choose`
+- If the file was created succesfully, we can plot some basic data on the simulation. Download your output file to your own computer and run the plotter in a local RStudio installation. 
+    - In your local RStudio, set the working directory to your downloaded copy of this repository by clicking `Session` (in the toolbar) > `Set Working Directory` > `Choose Directory` and selecting the folder.
 - Open `plot_InsetChart.Rmd`, update the paths to match your output directory (`root`) and the experiment `subfolder` (should be the experiment name supplied to the analyzer) where the "All_Age_Inset_Chart.csv" is located.
 
 ```r
@@ -168,7 +168,7 @@ This exercise demonstrates how to create demographics and climate files and how 
 
 
 1. Extracting climate data & adding to simulations
-    - Checkout `example_site.csv` in the [inputs folder](https://github.com/numalariamodeling/FE-2023-examples/tree/main/inputs). This file contains coordinates for an example site in Uganda and establishes that this will be our "Node 1" in the model. You may use these coordinates or select a different site (and adjust the coordinates accordingly) if you like for the rest of this example.
+    - Checkout `example_site.csv` in the [inputs folder](https://github.com/Zeidyen/FE-2026-examples/tree/main/inputs). This file contains coordinates for an example site in Uganda and establishes that this will be our "Node 1" in the model. You may use these coordinates or select a different site (and adjust the coordinates accordingly) if you like for the rest of this example.
     - Next, we'll run `extract_weather.py` - this script will run the weather generator. Notice that it reads information from `example_site.csv` to look for the right site and you can request weather for your time frame of interest. You'll also see that the platform for this is called *Calculon* - this is IDM's HPC _(requires access for climate database : ask someone from NU team)_
         - We can also run `recreate_weather.py` which will convert the weather files we just generated to a csv format that we can modify. For this example we don't need to make any modifications but this can be useful for research questions such as those relating to climate change. After running any modifications in the script we then convert the csv back to weather files.  
     - Now that you know what the scripts do, load your virtual environment and use `python3 extract_weather.py` to run the extraction.   
@@ -317,7 +317,7 @@ Now that you've learned the basics of how to run EMOD and add inputs/outputs you
 - Run the analyzer
 - Wait for the analyzer to succeed. Once it is finished check out your new processed outputs (see if you can find the `wdir` mentioned above without help). You should see two csvs, one from each analyzer, as well as a InsetChart.png. Make sure these files have been created and examine the data they contain.
     - *Note: this InsetChart.png is a similar plot to that of Week 1 but is written in python and included at the end of the analyzer script directly. This is meant to showcase the ability to create similar plots using R or python, to your comfort.*
-- ➕ As an additional exercise, try to make a data visualization in R or python based off of the MonthlyPfPRAnalyzer output (PfPR_Clinical_Incidence_monthly.csv), based on the `MalariaSummaryReport`. You'll need to take a look through the output file and decide what kind of figure may be interesting and inform you about your simulation. *Note: there is a [solution script](https://github.com/numalariamodeling/FE-2023-examples/blob/main/solution_scripts/Week2/plot_SummaryReport.Rmd) for this that is similar to the Week 1 InsetChart plotter, but it is highly recommended to try making your own version first as an exercise of creativity and data visualization skills where everyone may have unique ideas. Check out the [plotting resources](https://numalariamodeling.github.io/FE-2023-quarto-website/resources/coding_resources.html), then discuss with your colleagues or the instructional staff if you get stuck. If you use the solution script, remember that it is only meant as a sample plot and not a key way to show results as that will be dependent on specific research questions and model configurations.*
+- ➕ As an additional exercise, try to make a data visualization in R or python based off of the MonthlyPfPRAnalyzer output (PfPR_Clinical_Incidence_monthly.csv), based on the `MalariaSummaryReport`. You'll need to take a look through the output file and decide what kind of figure may be interesting and inform you about your simulation. *Note: there is a [solution script](https://github.com/Zeidyen/FE-2026-examples/blob/main/solution_scripts/Week2/plot_SummaryReport.Rmd) for this that is similar to the Week 1 InsetChart plotter, but it is highly recommended to try making your own version first as an exercise of creativity and data visualization skills where everyone may have unique ideas. Check out the [plotting resources](https://numalariamodeling.github.io/FE-2023-quarto-website/resources/coding_resources.html), then discuss with your colleagues or the instructional staff if you get stuck. If you use the solution script, remember that it is only meant as a sample plot and not a key way to show results as that will be dependent on specific research questions and model configurations.*
 - ➕ Once you've completed your data visualization exercise, feel free to try changing some other [config parameters](https://emod.idmod.org/emodpy-malaria/emod/parameter-configuration/) in your example script. Run additional simulations with different durations, population sizes, agebins, etc. - whatever you think would be interesting! This is a great time to look through the EMOD documentation and explore parameters so you get to know the EMOD ecosystem better. 
     - ⚠️ *Change your experiment name to keep track of your simulations in both the metadata and analyzer outputs*
     - You should also run these sims through the analyzer script by updating the experiment name and ID, as above. Inspect the outputs as well as any changes compared to your first run. What do you see? 
@@ -431,9 +431,9 @@ Depending on our project and site there are a variety of different parameters yo
                                		   filename_suffix=f'Monthly_U5_{sim_year}')
       ```
     - In the `general_sim()`, find the command `experiment.run(wait_until_done=True, platform=platform)` (line 148 in the solution script). This is the command that submits and runs our simulations. Notice that it has an argument to "wait until done" - this is what gives us the progress bar for the completion of our simulations after submission. Now that we are running longer simulations, set that to `False` to free up your terminal.
-        - ⚠️ *You should also remove the print messages following this line about whether or not the experiment has succeeded as we are no longer waiting for it to finish before continuing through the script. This will cause you to get the "experiment failed" warning message as the simulations will still be running (and thus not succeeded) when the submission script (`run_example_calibration.py`) runs this line. Instead, use `squeue -A b1139` to check the status of your running jobs on QUEST and then use stderr.txt and stdout.txt to determine if your simulations succeeded or failed when they finish running.*
+        - ⚠️ *You should also remove the print messages following this line about whether or not the experiment has succeeded as we are no longer waiting for it to finish before continuing through the script. This will cause you to get the "experiment failed" warning message as the simulations will still be running (and thus not succeeded) when the submission script (`run_example_calibration.py`) runs this line. Instead, use `squeue -u $USER` to check the status of your running jobs on the cluster and then use stderr.txt and stdout.txt to determine if your simulations succeeded or failed when they finish running.*
     - Update the `expt_name` and run your simulations.
-            - These simulations may take longer due to the longer simulation duration. You can check the progress of your jobs and what else is running on the same allocation using `squeue -A b1139` or just the progress of your jobs with `squeue -u <username>`.
+            - These simulations may take longer due to the longer simulation duration. You can check the progress of your jobs and what else is running using `squeue` or just the progress of your own jobs with `squeue -u $USER`.
             - Once the simulations finish running, check your outputs. Is everything there? Do all your reports look like you expect?
     - Update the `expt_name`, `exp_id`, and years to analyze in the `analyzer_calibration.py` then run the script when your simulations finish - check out the differences between this and previous analyzers (and their outputs).
 
@@ -442,7 +442,7 @@ Depending on our project and site there are a variety of different parameters yo
     - The `example_calibration_selection.py` script is a simple example of how we may select the best match parameter value for calibration. It calculates the average log-likelihood of each `x_Temporary_Larval_Habitat` based on simulation outputs and produces some plots to visualize the parameter selection.
     - Update the `expt_name` to match that of your calibration sweeps that you just ran.
     - Before you run the selection script, take a look through it and see if you can understand how it works and what it will produce. Keep this in mind and then run and compare to the results after it's finished.
-	- Note: you may need to install `idmtools-calibra` & `seaborn` if you are using your own virtual environment - the shared environment on QUEST should already have these. The `idmtools-calibra` package can be installed using the following and should also install the `seaborn` dependency:
+	- Note: you may need to install `idmtools-calibra` & `seaborn` if you are using your own virtual environment - the shared environment on the cluster should already have these. The `idmtools-calibra` package can be installed using the following and should also install the `seaborn` dependency:
 	
 	  ```python
 	  pip install idmtools-calibra --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple

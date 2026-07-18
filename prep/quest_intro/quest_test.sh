@@ -1,6 +1,5 @@
 #!/bin/bash
-#SBATCH --account=b1139  
-#SBATCH --partition=b1139
+#SBATCH --partition=demo
 #SBATCH --nodes=1                            ## how many computers do you need?
 #SBATCH --ntasks-per-node=1                  ## how many cpus or processors do you need on each computer?
 #SBATCH --time=00:10:00                      ## time needed to run (HH:MM:SS)
@@ -9,7 +8,7 @@
 #SBATCH --output=outlog                      ## standard output goes to this file
 #SBATCH --error=errlog                       ## standard error goes to this file
 #SBATCH --mail-type=ALL                      ## receive e-mail alerts from SLURM when your job begins and finishes
-#SBATCH --mail-user=<email>@northwestern.edu 
+#SBATCH --mail-user=<your-email>          ## replace with your e-mail address
 
 module purge all
 module load python

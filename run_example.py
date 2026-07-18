@@ -12,8 +12,6 @@ from idmtools.entities.experiment import Experiment
 
 #emodpy
 from emodpy.emod_task import EMODTask
-from emodpy.utils import EradicationBambooBuilds
-from emodpy.bamboo import get_model_files
 import emod_api.config.default_from_schema_no_validation as dfs
 import emod_api.campaign as camp
 
@@ -30,6 +28,10 @@ def set_param_fn(config):
     """
     import emodpy_malaria.malaria_config as conf
     config = conf.set_team_defaults(config, manifest)
+
+    # Defaults to 0 (off) in the installed Eradication build's schema - turn on so
+    # InsetChart.json gets written to each simulation's output folder.
+    config.parameters.Enable_Default_Reporting = 1
 
     return config
 
@@ -60,9 +62,12 @@ def general_sim(selected_platform):
     every time we run an emod experiment. 
     """
 
-    # Set platform and associated values, such as the maximum number of jobs to run at one time
-    platform = Platform(selected_platform, job_directory=manifest.job_directory, partition='b1139', time='2:00:00',
-                            account='b1139', modules=['singularity'], max_running_jobs=10)
+    # Set platform and associated values, such as the maximum number of jobs to run at one time.
+    # All cluster-specific settings live in manifest.py so users only edit that file.
+    platform = Platform(selected_platform, job_directory=manifest.job_directory,
+                            partition=manifest.partition, time=manifest.sim_time,
+                            modules=[manifest.singularity_module],
+                            max_running_jobs=manifest.max_running_jobs)
 
     # create EMODTask 
     print("Creating EMODTask (from files)...")
@@ -82,11 +87,11 @@ def general_sim(selected_platform):
     
     # set the singularity image to be used when running this experiment
     task.set_sif(manifest.SIF_PATH, platform)
-    
+
 
     # create experiment from builder
     user = os.getlogin()
-    experiment = Experiment.from_task(task, name= f'{user}_FE_example_basic')
+    experiment = Experiment.from_task(task, name='')
 
 
     # The last step is to call run() on the ExperimentManager to run the simulations.
@@ -107,6 +112,7 @@ if __name__ == "__main__":
     import pathlib
 
     dtk.setup(pathlib.Path(manifest.eradication_path).parent)
+    os.chmod(manifest.eradication_path, 0o755)
 
     selected_platform = "SLURM_LOCAL"
     general_sim(selected_platform)

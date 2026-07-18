@@ -7,61 +7,112 @@ output: html_document
 
 ## Installation Methods
 
-Below are instructions on how to install emodpy from the terminal, particularly for use on QUEST, or other linux-based clusters. The following instructions are specific to QUEST but can easily be adapted to other clusters or HPCs that use SLURM scheduling. There is an existing virtual environments (emodpy_alt) that is up-to-date on b1139 and available for team use. If choosing to use these it is recommended that you set up an alias in your `.bashrc` file for ease of access, but otherwise require no installation. However, if you would like to use your own virtual environment or version of emodpy/idmtools you can use these to setup on your home directory.
+Below are instructions on how to run emodpy from the terminal on our AWS
+SLURM cluster, or other linux-based clusters. The instructions are specific to
+our AWS setup but can easily be adapted to other clusters or HPCs that use SLURM
+scheduling. A shared, up-to-date virtual environment already exists on the
+cluster (see **Option A**), so most participants do **not** need to install
+anything. If you would prefer to manage your own environment or a specific
+version of emodpy/idmtools, follow **Option B**.
 
-### Prerequisites, Login, Load Python
+### Prerequisites, Login, Modules
 
-1. Review prerequisites and recommendations. 
-    a. https://docs.idmod.org/projects/idmtools/en/latest/platforms/slurm/index.html#prerequisites 
-    b. https://docs.idmod.org/projects/idmtools/en/latest/platforms/slurm/index.html#recommendations 
+1. Review prerequisites and recommendations.
+    a. https://docs.idmod.org/projects/idmtools/en/latest/platforms/slurm/index.html#prerequisites
+    b. https://docs.idmod.org/projects/idmtools/en/latest/platforms/slurm/index.html#recommendations
 
-2. Login/SSH to Slurm cluster (QUEST). You can either use FastX or directly SSH from terminal prompt, like the following: 
-
-
-    ``` bash
-    ssh –X <usernamehere>@quest.northwestern.edu 
-    ```
-
-3. Load Python module 3.8.4, at terminal prompt, type the following: 
-    - *NOTE: idmtools requires Python 3.7 or higher. This is the reason for loading Python 3.8.4, which is available on QUEST; however, QUEST currently defaults to Python 3.6.x.* 
-
-    ``` bash
-    module load python/3.8.4
-    ```
-
-4. Pull Singularity image containing Python and MPI (used by emodpy-malaria tasks) 
-
-    - *NOTE: this sif file already exists in `/projects/b1139/images/dtk_run_rocky_py39.sif` and does not need to be reinstalled if you have access to the project*
+2. Login/SSH to the cluster. Connect using the method provided for the program
+   (SSH, or the AWS session manager / web terminal you were given). A direct SSH
+   from a terminal prompt looks like the following:
 
     ``` bash
-    curl https://packages.idmod.org:443/artifactory/idm-docker-public/idmtools/rocky_mpi/dtk_run_rocky_py39.sif -o dtk_run_rocky_py39.sif
+    ssh -X <username>@<your-cluster-login-host>
     ```
 
-### Installation with Virtual Environment – `SLURM_LOCAL` Mode
+    - *NOTE: replace `<your-cluster-login-host>` with the login address supplied
+      by the program organizers. Your home directory on the cluster is
+      `~` (i.e. `/shared/home/<username>`), and this is where you should clone
+      the `FE-2026-examples` repository.*
 
-*NOTE: A shared environment exists in /projects/b1139/environments/emodpy_alt for `SLURM_LOCAL`. The following instructions will teach you how to make your own installation if desired*
-
-1. Create a Python virtual environment, unload Python module, and activate virtual environment, which is named “myvenv” in the following: 
-    - *NOTE: you may name the environment anything you like, "myvenv" is just an example*
+3. Singularity/Apptainer (used by emodpy-malaria tasks to run EMOD) is provided
+   as an environment module. The run scripts load it for you automatically via
+   `manifest.singularity_module`, so you do not normally need to load it by
+   hand. To use it interactively:
 
     ``` bash
-    python3 -m venv <myvenv> 
-    module unload python/3.8.4 
-    source ./<myvenv>/bin/activate 
+    module use /shared/emod/shared_tools/modulefiles
+    module load singularity
     ```
-    - *NOTE: The following step is only needed when a new idmtools Singularity image is available and you’ve previously installed packages in your home directory. This cleans up local packages from previous installations inside Singularity container*
+
+4. The Singularity image used to run EMOD is bundled with this repository at
+   `containers/dtk_run_al2023.sif` and is referenced by `manifest.SIF_PATH`, so
+   there is nothing to download.
+
+    - *NOTE: the older `dtk_run_rocky_py39.sif` (the image used on the previous
+      Quest cluster) is built on a Rocky base whose glibc is too old for the
+      pip-installed Eradication binary, which targets Amazon Linux 2023. The
+      custom `dtk_run_al2023.sif` image (built from `containers/dtk_run_al2023.def`)
+      matches that base and is what you should use on AWS.*
+
+### Option A: Use the shared environment (recommended)
+
+A shared virtual environment (Python 3.11) already has emodpy-malaria,
+idmtools, and the SLURM platform installed. Just activate it — no installation
+required:
+
+``` bash
+source /shared/emod/emodpy-malaria/.venv/bin/activate
+```
+
+It is convenient to add an alias to your `.bashrc` so you can activate it with a
+single command:
+
+``` bash
+alias load_emodpy='source /shared/emod/emodpy-malaria/.venv/bin/activate'
+```
+
+After adding the alias, run `source ~/.bashrc` once, then simply type
+`load_emodpy` whenever you want to activate the environment.
+
+### Option B: Build your own virtual environment – `SLURM_LOCAL` mode
+
+If you would rather manage your own environment, create one in your home
+directory. The system `python3` (>= 3.7, required by idmtools) is sufficient;
+no Python module needs to be loaded on AWS.
+
+1. Create and activate a Python virtual environment (named "myvenv" here — you
+   may use any name):
 
     ``` bash
-    rm –fr ~/.local/lib/python* 
+    python3 -m venv myvenv
+    source ./myvenv/bin/activate
     ```
 
-2. Install emodpy-malaria and idmtools_platform_slurm
+    - *NOTE: The following step is only needed when a new idmtools Singularity
+      image is available and you've previously installed packages in your home
+      directory. It clears local packages from previous installations inside the
+      Singularity container:*
 
-    ``` python
-    pip3 install emodpy-malaria --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple 
-   
+    ``` bash
+    rm -fr ~/.local/lib/python*
+    ```
+
+2. Install emodpy-malaria and the idmtools SLURM platform:
+
+    ``` bash
+    pip3 install emodpy-malaria --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
+
     pip3 install idmtools_platform_slurm --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
-    ```    
+    ```
 
-3. During installation of the shared venv on b1139, some issues arose that cause the installation to quit unexpectedly. This is seemingly an issue with access to the libgit2 module to build the pygit wheel. Libgit2 was installed within the emodpy_alt venv folder using these [instructions](https://github.com/libgit2/pygit2/blob/master/docs/install.rst#libgit2-within-a-virtual-environment). As it is now available, installation should hopefully avoid these issues in the future but it could occur with personal venvs (if team members choose to create their own environments).
-    - *NOTE: The above installation instructions are for emodpy-malaria, which includes installing idmtools and other dependencies by referencing the requirements.txt when using pip install. For more information on requirements.txt and pip install, see https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#using-requirements-files*
+    - *NOTE: some weeks also use `idmtools-calibra` and `seaborn` (Week 3
+      calibration). Install them with the same index URL if you build your own
+      environment; the shared environment already includes them:*
+
+    ``` bash
+    pip3 install idmtools-calibra seaborn --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
+    ```
+
+    - *NOTE: The above installs emodpy-malaria and its dependencies (idmtools,
+      emod-api, etc.). For more on `pip install` and virtual environments, see
+      https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#using-requirements-files*
