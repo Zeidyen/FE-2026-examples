@@ -33,7 +33,9 @@ from utils_slurm import build_burnin_df
 
 serialize_years=50
 pickup_years=5
-burnin_exp_id = 'ac7d567c-aa94-4fd3-929a-f295cc682b1c'
+# Paste the experiment ID of YOUR completed burnin run here. It is printed when the
+# burnin script finishes (and is the '<id>' in experiments/e_..._<id>).
+burnin_exp_id = '<your-burnin-experiment-id>'
 
 def set_param_fn(config):
     """

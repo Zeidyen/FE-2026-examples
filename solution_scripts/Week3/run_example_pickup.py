@@ -26,12 +26,14 @@ from emodpy_malaria.reporters.builtin import *
 import manifest
 
 import sys
-sys.path.append('../')
+sys.path.append('../../')
 from utils_slurm import build_burnin_df
 
 serialize_years=10
 pickup_years=5
-burnin_exp_id = 'dca5d678-dd18-4512-ac87-e1ddcf88a2fa'
+# Paste the experiment ID of YOUR completed burnin run here. It is printed when the
+# burnin script finishes (and is the '<id>' in experiments/e_..._<id>).
+burnin_exp_id = '<your-burnin-experiment-id>'
 
 def set_param_fn(config):
     """
