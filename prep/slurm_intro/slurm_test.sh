@@ -12,4 +12,4 @@
 
 # On AWS the system python3 is sufficient (no python module to load).
 python3 --version
-python3 quest_test.py --name STRANGER  # Replace STRANGER with your name to supply to the python script
+python3 slurm_test.py --name STRANGER  # Replace STRANGER with your name to supply to the python script
