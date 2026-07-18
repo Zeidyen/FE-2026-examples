@@ -26,11 +26,12 @@ version of emodpy/idmtools, follow **Option B**.
    from a terminal prompt looks like the following:
 
     ``` bash
-    ssh -X <username>@<your-cluster-login-host>
+    ssh -i <path-to-your-key> <username>@13.58.119.211
     ```
 
-    - *NOTE: replace `<your-cluster-login-host>` with the login address supplied
-      by the program organizers. Your home directory on the cluster is
+    - *NOTE: connect with the SSH key file and username issued to you by the
+      program organizers (replace `<path-to-your-key>` and `<username>`; add
+      `-X` if you want X11 forwarding). Your home directory on the cluster is
       `~` (i.e. `/shared/home/<username>`), and this is where you should clone
       the `FE-2026-examples` repository.*
 
